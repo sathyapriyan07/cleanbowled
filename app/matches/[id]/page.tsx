@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import MatchTabs from "@/components/MatchTabs";
 import { supabase } from "@/lib/supabase";
 import {
+
+export const dynamic = "force-dynamic";
   Match,
   MatchBatting,
   MatchBowling,

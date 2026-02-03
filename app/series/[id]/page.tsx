@@ -4,6 +4,8 @@ import Tabs from "@/components/Tabs";
 import Card from "@/components/Card";
 import { supabase } from "@/lib/supabase";
 import {
+
+export const dynamic = "force-dynamic";
   Match,
   Series,
   SeriesPoint,

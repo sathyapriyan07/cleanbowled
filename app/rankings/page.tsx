@@ -4,6 +4,8 @@ import Card from "@/components/Card";
 import { supabase } from "@/lib/supabase";
 import { Ranking } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 const formats = ["All", "T20I", "ODI", "Test", "IPL"];
 const categories = ["Teams", "Batting", "Bowling"];
 

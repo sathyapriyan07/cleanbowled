@@ -5,6 +5,8 @@ import { supabase } from "@/lib/supabase";
 import { sampleMatches } from "@/lib/sampleData";
 import { Match } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function MatchesPage() {
   const { data } = await supabase
     .from("matches")

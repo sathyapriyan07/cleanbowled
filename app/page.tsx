@@ -2,9 +2,13 @@ import Header from "@/components/Header";
 import MatchCard from "@/components/MatchCard";
 import SeriesCard from "@/components/SeriesCard";
 import SectionHeader from "@/components/SectionHeader";
+import Card from "@/components/Card";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { sampleMatches, sampleSeries } from "@/lib/sampleData";
 import { Match, Series } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const { data: matches } = await supabase
@@ -64,6 +68,25 @@ export default async function Home() {
                   }
                 />
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <SectionHeader title="Explore" subtitle="Rankings, stats, venues, and search" />
+          <div className="grid gap-4 md:grid-cols-2">
+            {[
+              { href: "/rankings", title: "Rankings", desc: "Team and player leaderboards" },
+              { href: "/stats", title: "Stats & Records", desc: "Records and comparisons" },
+              { href: "/venues", title: "Venues", desc: "Stadium profiles and stats" },
+              { href: "/search", title: "Search", desc: "Find players, teams, matches" }
+            ].map((item) => (
+              <Link key={item.href} href={item.href}>
+                <Card className="transition hover:-translate-y-0.5 hover:border-white/20">
+                  <p className="font-[var(--font-sora)] text-base">{item.title}</p>
+                  <p className="mt-1 text-xs text-muted">{item.desc}</p>
+                </Card>
+              </Link>
             ))}
           </div>
         </section>

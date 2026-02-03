@@ -4,6 +4,8 @@ import Card from "@/components/Card";
 import Avatar from "@/components/Avatar";
 import { supabase } from "@/lib/supabase";
 import {
+
+export const dynamic = "force-dynamic";
   Team,
   TeamRecord,
   TeamSquad,

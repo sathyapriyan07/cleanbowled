@@ -5,6 +5,8 @@ import { supabase } from "@/lib/supabase";
 import { sampleSeries } from "@/lib/sampleData";
 import { Series } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function SeriesPage() {
   const { data } = await supabase
     .from("series")

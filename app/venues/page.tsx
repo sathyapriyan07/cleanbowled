@@ -5,6 +5,8 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { Venue } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function VenuesPage() {
   const { data } = await supabase.from("venues").select("*").order("name");
   const venues = (data ?? []) as Venue[];

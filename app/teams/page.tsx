@@ -6,6 +6,8 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { Team } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function TeamsPage() {
   const { data } = await supabase.from("teams").select("*").order("name");
   const teams = (data ?? []) as Team[];
