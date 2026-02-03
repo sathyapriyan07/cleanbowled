@@ -25,16 +25,16 @@ export default async function MatchesPage() {
             <div key={match.id} className="carousel-item min-w-[280px]">
               <MatchCard
                 id={match.id}
-                team1={match.team1?.name ?? "Team One"}
-                team2={match.team2?.name ?? "Team Two"}
-                team1Logo={match.team1?.logo ?? undefined}
-                team2Logo={match.team2?.logo ?? undefined}
-                score1={match.score1 ?? undefined}
-                score2={match.score2 ?? undefined}
-                result={match.result ?? undefined}
-                venue={match.venue ?? undefined}
-                date={match.date ?? undefined}
-                thumbnail={match.thumbnail ?? undefined}
+                team1={match.team1?.name ? "Team One"}
+                team2={match.team2?.name ? "Team Two"}
+                team1Logo={match.team1?.logo ? undefined}
+                team2Logo={match.team2?.logo ? undefined}
+                score1={match.score1 ? undefined}
+                score2={match.score2 ? undefined}
+                result={match.result ? undefined}
+                venue={match.venue ? undefined}
+                date={match.date ? undefined}
+                thumbnail={match.thumbnail ? undefined}
               />
             </div>
           ))}

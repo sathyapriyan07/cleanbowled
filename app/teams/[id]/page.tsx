@@ -28,17 +28,17 @@ export default async function TeamDetail({ params }: { params: Promise<{ id: str
     .select("*")
     .eq("team_id", id);
 
-  const teamData = (team ?? { id, name: "Team", logo: null }) as Team;
-  const squadList = (squads ?? []) as TeamSquad[];
-  const recordList = (records ?? []) as TeamRecord[];
-  const trophyList = (trophies ?? []) as TeamTrophy[];
-  const venueList = (venuePerf ?? []) as TeamVenuePerformance[];
+  const teamData = (team ? { id, name: "Team", logo: null }) as Team;
+  const squadList = (squads ? []) as TeamSquad[];
+  const recordList = (records ? []) as TeamRecord[];
+  const trophyList = (trophies ? []) as TeamTrophy[];
+  const venueList = (venuePerf ? []) as TeamVenuePerformance[];
 
   return (
     <div className="pb-24">
       <Header
         title={teamData.name}
-        subtitle={`Captain: ${teamData.captain ?? "TBD"} · Coach: ${teamData.coach ?? "TBD"}`}
+        subtitle={`Captain: ${teamData.captain ? "TBD"} · Coach: ${teamData.coach ? "TBD"}`}
         showBack
         backHref="/teams"
       />
@@ -53,7 +53,7 @@ export default async function TeamDetail({ params }: { params: Promise<{ id: str
             />
           ) : null}
           <div className="relative flex items-center gap-4">
-            <Avatar src={teamData.logo ?? undefined} alt={teamData.name} size="lg" />
+            <Avatar src={teamData.logo ? undefined} alt={teamData.name} size="lg" />
             <div>
               <p className="text-xs uppercase tracking-widest text-muted">Team</p>
               <h2 className="font-[var(--font-sora)] text-2xl">{teamData.name}</h2>
@@ -69,11 +69,11 @@ export default async function TeamDetail({ params }: { params: Promise<{ id: str
                 <div className="grid gap-4 md:grid-cols-2">
                   <Card>
                     <p className="text-xs text-muted">Captain</p>
-                    <p className="font-[var(--font-sora)] text-lg">{teamData.captain ?? "TBD"}</p>
+                    <p className="font-[var(--font-sora)] text-lg">{teamData.captain ? "TBD"}</p>
                   </Card>
                   <Card>
                     <p className="text-xs text-muted">Coach</p>
-                    <p className="font-[var(--font-sora)] text-lg">{teamData.coach ?? "TBD"}</p>
+                    <p className="font-[var(--font-sora)] text-lg">{teamData.coach ? "TBD"}</p>
                   </Card>
                 </div>
               )
@@ -85,10 +85,10 @@ export default async function TeamDetail({ params }: { params: Promise<{ id: str
                   {squadList.map((row) => (
                     <Card key={row.id} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Avatar src={row.player?.profile_image ?? undefined} alt={row.player?.name ?? "Player"} size="sm" />
+                        <Avatar src={row.player?.profile_image ? undefined} alt={row.player?.name ? "Player"} size="sm" />
                         <div>
-                          <p className="text-sm">{row.player?.name ?? "Player"}</p>
-                          <p className="text-xs text-muted">{row.role ?? "Player"}</p>
+                          <p className="text-sm">{row.player?.name ? "Player"}</p>
+                          <p className="text-xs text-muted">{row.role ? "Player"}</p>
                         </div>
                       </div>
                     </Card>
@@ -104,8 +104,8 @@ export default async function TeamDetail({ params }: { params: Promise<{ id: str
                 <div className="space-y-3">
                   {recordList.map((row) => (
                     <Card key={row.id}>
-                      <p className="text-xs uppercase tracking-wide text-muted">{row.title ?? "Record"}</p>
-                      <p className="font-[var(--font-sora)] text-base">{row.value ?? ""}</p>
+                      <p className="text-xs uppercase tracking-wide text-muted">{row.title ? "Record"}</p>
+                      <p className="font-[var(--font-sora)] text-base">{row.value ? ""}</p>
                       {row.description ? <p className="mt-2 text-sm text-muted">{row.description}</p> : null}
                     </Card>
                   ))}
@@ -121,10 +121,10 @@ export default async function TeamDetail({ params }: { params: Promise<{ id: str
                   {trophyList.map((row) => (
                     <Card key={row.id} className="flex items-center justify-between">
                       <div>
-                        <p className="font-[var(--font-sora)] text-base">{row.title ?? "Trophy"}</p>
-                        <p className="text-xs text-muted">{row.description ?? ""}</p>
+                        <p className="font-[var(--font-sora)] text-base">{row.title ? "Trophy"}</p>
+                        <p className="text-xs text-muted">{row.description ? ""}</p>
                       </div>
-                      <span className="text-xs text-muted">{row.year ?? "—"}</span>
+                      <span className="text-xs text-muted">{row.year ? "—"}</span>
                     </Card>
                   ))}
                 </div>
@@ -139,7 +139,7 @@ export default async function TeamDetail({ params }: { params: Promise<{ id: str
                   {venueList.map((row) => (
                     <Card key={row.id} className="flex items-center justify-between">
                       <div>
-                        <p className="font-[var(--font-sora)] text-base">{row.venue ?? "Venue"}</p>
+                        <p className="font-[var(--font-sora)] text-base">{row.venue ? "Venue"}</p>
                         <p className="text-xs text-muted">
                           Matches {row.matches} · Wins {row.wins} · Losses {row.losses}
                         </p>

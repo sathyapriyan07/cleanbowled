@@ -71,11 +71,15 @@ export default async function PlayerProfile({
   const graphList = (graphPoints ?? []) as PlayerGraphPoint[];
   const newsList = (news ?? []) as News[];
 
+  const age = profile.dob
+    ? Math.floor((Date.now() - new Date(profile.dob).getTime()) / (365.25 * 24 * 60 * 60 * 1000))
+    : null;
+
   return (
     <div className="pb-24">
       <Header
         title={profile.name}
-        subtitle={`${profile.country ?? "International"} · ${profile.dob ? "Age " + Math.floor((Date.now() - new Date(profile.dob).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : "Age n/a"}`}
+        subtitle={`${profile.country ?? "International"} ? ${age ? `${age} yrs` : "Age n/a"}`}
         showBack
         backHref="/players"
         rightSlot={null}
@@ -87,14 +91,14 @@ export default async function PlayerProfile({
             <img
               src={profile.banner}
               alt={profile.name}
-              className="absolute inset-0 h-full w-full object-cover opacity-30"
+              className="absolute inset-0 h-full w-full object-cover opacity-25"
             />
           ) : null}
-          <div className="relative max-w-[60%] space-y-2">
-            <p className="text-xs uppercase tracking-widest text-muted">Player</p>
+          <div className="relative max-w-[65%] space-y-2">
+            <p className="section-label">Player</p>
             <h2 className="font-[var(--font-sora)] text-2xl">{profile.name}</h2>
             <p className="text-sm text-muted">
-              {profile.role ?? "All-rounder"} · {profile.country ?? "—"}
+              {profile.country ?? "International"} ? {age ? `${age} yrs` : "Age n/a"}
             </p>
           </div>
           <div className="absolute bottom-0 right-3">

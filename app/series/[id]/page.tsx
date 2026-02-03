@@ -47,7 +47,7 @@ export default async function SeriesDetail({
     .select("*")
     .eq("series_id", id);
 
-  const seriesData = (series ?? {
+  const seriesData = (series ? {
     id,
     name: "Series Name",
     location: "Location TBC",
@@ -55,16 +55,16 @@ export default async function SeriesDetail({
     end_date: "TBD"
   }) as Series;
 
-  const matchList = (matches ?? []) as Match[];
-  const pointsTable = (points ?? []) as SeriesPoint[];
-  const squadsList = (squads ?? []) as SeriesSquad[];
-  const leadersList = (leaders ?? []) as SeriesStatsLeader[];
+  const matchList = (matches ? []) as Match[];
+  const pointsTable = (points ? []) as SeriesPoint[];
+  const squadsList = (squads ? []) as SeriesSquad[];
+  const leadersList = (leaders ? []) as SeriesStatsLeader[];
 
   return (
     <div className="pb-24">
       <Header
         title={seriesData.name}
-        subtitle={`${seriesData.location ?? "International"} · ${seriesData.start_date ?? "TBD"} - ${seriesData.end_date ?? "TBD"}`}
+        subtitle={`${seriesData.location ? "International"} · ${seriesData.start_date ? "TBD"} - ${seriesData.end_date ? "TBD"}`}
         showBack
         backHref="/series"
       />
@@ -82,7 +82,7 @@ export default async function SeriesDetail({
             <div>
               <p className="text-xs uppercase tracking-wide text-muted">Series</p>
               <p className="font-[var(--font-sora)] text-lg">{seriesData.name}</p>
-              <p className="text-xs text-muted">{seriesData.season ?? "Season"} · {seriesData.format ?? "Format"}</p>
+              <p className="text-xs text-muted">{seriesData.season ? "Season"} · {seriesData.format ? "Format"}</p>
             </div>
             <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase text-muted">
               {seriesData.is_archived ? "Archived" : "Active"}
@@ -99,16 +99,16 @@ export default async function SeriesDetail({
                     <MatchCard
                       key={match.id}
                       id={match.id}
-                      team1={match.team1?.name ?? "Team One"}
-                      team2={match.team2?.name ?? "Team Two"}
-                      team1Logo={match.team1?.logo ?? undefined}
-                      team2Logo={match.team2?.logo ?? undefined}
-                      score1={match.score1 ?? undefined}
-                      score2={match.score2 ?? undefined}
-                      result={match.result ?? undefined}
-                      venue={match.venue ?? undefined}
-                      date={match.date ?? undefined}
-                      thumbnail={match.thumbnail ?? undefined}
+                      team1={match.team1?.name ? "Team One"}
+                      team2={match.team2?.name ? "Team Two"}
+                      team1Logo={match.team1?.logo ? undefined}
+                      team2Logo={match.team2?.logo ? undefined}
+                      score1={match.score1 ? undefined}
+                      score2={match.score2 ? undefined}
+                      result={match.result ? undefined}
+                      venue={match.venue ? undefined}
+                      date={match.date ? undefined}
+                      thumbnail={match.thumbnail ? undefined}
                     />
                   ))}
                 </div>
@@ -135,7 +135,7 @@ export default async function SeriesDetail({
                     <tbody>
                       {pointsTable.map((row) => (
                         <tr key={row.id} className="border-t border-white/5">
-                          <td className="px-3 py-3">{row.team?.name ?? "Team"}</td>
+                          <td className="px-3 py-3">{row.team?.name ? "Team"}</td>
                           <td className="px-3 py-3">{row.played}</td>
                           <td className="px-3 py-3">{row.won}</td>
                           <td className="px-3 py-3">{row.lost}</td>
@@ -158,10 +158,10 @@ export default async function SeriesDetail({
                   {squadsList.map((row) => (
                     <Card key={row.id} className="flex items-center justify-between">
                       <div>
-                        <p className="text-xs text-muted">{row.team?.name ?? "Team"}</p>
-                        <p className="font-[var(--font-sora)] text-sm">{row.player?.name ?? "Player"}</p>
+                        <p className="text-xs text-muted">{row.team?.name ? "Team"}</p>
+                        <p className="font-[var(--font-sora)] text-sm">{row.player?.name ? "Player"}</p>
                       </div>
-                      <span className="text-xs text-muted">{row.role ?? "Player"}</span>
+                      <span className="text-xs text-muted">{row.role ? "Player"}</span>
                     </Card>
                   ))}
                 </div>
@@ -176,12 +176,12 @@ export default async function SeriesDetail({
                   {leadersList.map((row) => (
                     <Card key={row.id} className="flex items-center justify-between">
                       <div>
-                        <p className="text-xs text-muted">{row.stat_type ?? "Stat"}</p>
+                        <p className="text-xs text-muted">{row.stat_type ? "Stat"}</p>
                         <p className="font-[var(--font-sora)] text-sm">
-                          {row.player_name ?? "Player"} · {row.team_name ?? "Team"}
+                          {row.player_name ? "Player"} · {row.team_name ? "Team"}
                         </p>
                       </div>
-                      <span className="text-xs text-ink">{row.value ?? 0}</span>
+                      <span className="text-xs text-ink">{row.value ? 0}</span>
                     </Card>
                   ))}
                 </div>

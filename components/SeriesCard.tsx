@@ -21,7 +21,7 @@ export default function SeriesCard({ id, name, location, dates, banner }: Series
         </div>
         <div>
           <p className="font-[var(--font-sora)] text-base">{name}</p>
-          <p className="text-xs text-muted">{location ?? "International"} · {dates ?? "TBD"}</p>
+          <p className="text-xs text-muted">{location ? "International"} · {dates ? "TBD"}</p>
         </div>
       </Card>
     </Link>

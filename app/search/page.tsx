@@ -46,7 +46,7 @@ export default function SearchPage() {
       if (country) req = req.eq("country", country);
       if (role) req = req.eq("role", role);
       const { data } = await req;
-      setPlayers((data ?? []) as Player[]);
+      setPlayers((data ? []) as Player[]);
       setLoading(false);
       return;
     }
@@ -55,7 +55,7 @@ export default function SearchPage() {
       let req = supabase.from("teams").select("*").range(offset, offset + pageSize - 1);
       if (q) req = req.ilike("name", `%${q}%`);
       const { data } = await req;
-      setTeams((data ?? []) as Team[]);
+      setTeams((data ? []) as Team[]);
       setLoading(false);
       return;
     }
@@ -69,7 +69,7 @@ export default function SearchPage() {
       if (format) req = req.eq("format", format);
       if (yearRange) req = req.gte("date", yearRange.start).lte("date", yearRange.end);
       const { data } = await req;
-      setMatches((data ?? []) as Match[]);
+      setMatches((data ? []) as Match[]);
       setLoading(false);
       return;
     }
@@ -80,7 +80,7 @@ export default function SearchPage() {
       if (format) req = req.eq("format", format);
       if (yearRange) req = req.gte("start_date", yearRange.start).lte("start_date", yearRange.end);
       const { data } = await req;
-      setSeries((data ?? []) as Series[]);
+      setSeries((data ? []) as Series[]);
       setLoading(false);
       return;
     }
@@ -91,10 +91,10 @@ export default function SearchPage() {
       supabase.from("matches").select("*, team1:team1_id(name, logo), team2:team2_id(name, logo)").limit(4),
       supabase.from("series").select("*").limit(4)
     ]);
-    setPlayers((playersRes.data ?? []) as Player[]);
-    setTeams((teamsRes.data ?? []) as Team[]);
-    setMatches((matchesRes.data ?? []) as Match[]);
-    setSeries((seriesRes.data ?? []) as Series[]);
+    setPlayers((playersRes.data ? []) as Player[]);
+    setTeams((teamsRes.data ? []) as Team[]);
+    setMatches((matchesRes.data ? []) as Match[]);
+    setSeries((seriesRes.data ? []) as Series[]);
     setLoading(false);
   };
 
@@ -204,11 +204,11 @@ export default function SearchPage() {
               teams.map((team) => (
                 <Link key={team.id} href={`/teams/${team.id}`}>
                   <Card className="flex items-center gap-4">
-                    <Avatar src={team.logo ?? undefined} alt={team.name} size="md" />
+                    <Avatar src={team.logo ? undefined} alt={team.name} size="md" />
                     <div>
                       <p className="font-[var(--font-sora)] text-base">{team.name}</p>
                       <p className="text-xs text-muted">
-                        Captain: {team.captain ?? "TBD"} · Coach: {team.coach ?? "TBD"}
+                        Captain: {team.captain ? "TBD"} · Coach: {team.coach ? "TBD"}
                       </p>
                     </div>
                   </Card>
@@ -228,16 +228,16 @@ export default function SearchPage() {
                 <MatchCard
                   key={match.id}
                   id={match.id}
-                  team1={match.team1?.name ?? "Team One"}
-                  team2={match.team2?.name ?? "Team Two"}
-                  team1Logo={match.team1?.logo ?? undefined}
-                  team2Logo={match.team2?.logo ?? undefined}
-                  score1={match.score1 ?? undefined}
-                  score2={match.score2 ?? undefined}
-                  result={match.result ?? undefined}
-                  venue={match.venue ?? undefined}
-                  date={match.date ?? undefined}
-                  thumbnail={match.thumbnail ?? undefined}
+                  team1={match.team1?.name ? "Team One"}
+                  team2={match.team2?.name ? "Team Two"}
+                  team1Logo={match.team1?.logo ? undefined}
+                  team2Logo={match.team2?.logo ? undefined}
+                  score1={match.score1 ? undefined}
+                  score2={match.score2 ? undefined}
+                  result={match.result ? undefined}
+                  venue={match.venue ? undefined}
+                  date={match.date ? undefined}
+                  thumbnail={match.thumbnail ? undefined}
                 />
               ))
             ) : (
@@ -255,8 +255,8 @@ export default function SearchPage() {
                   key={item.id}
                   id={item.id}
                   name={item.name}
-                  banner={item.banner ?? undefined}
-                  location={item.location ?? undefined}
+                  banner={item.banner ? undefined}
+                  location={item.location ? undefined}
                   dates={
                     item.start_date && item.end_date
                       ? `${item.start_date} · ${item.end_date}`

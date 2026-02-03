@@ -31,15 +31,15 @@ export default function AdminNewsEdit() {
       const data = newsRes.data;
       if (data) {
         setForm({
-          title: data.title ?? "",
-          content: data.content ?? "",
-          player_id: data.player_id ?? "",
-          match_id: data.match_id ?? "",
-          image: data.image ?? ""
+          title: data.title ? "",
+          content: data.content ? "",
+          player_id: data.player_id ? "",
+          match_id: data.match_id ? "",
+          image: data.image ? ""
         });
       }
-      setPlayers((playerRes.data ?? []) as Player[]);
-      setMatches((matchRes.data ?? []) as Match[]);
+      setPlayers((playerRes.data ? []) as Player[]);
+      setMatches((matchRes.data ? []) as Match[]);
       setLoading(false);
     };
     load();
@@ -105,7 +105,7 @@ export default function AdminNewsEdit() {
             <option value="">Match (optional)</option>
             {matches.map((match: any) => (
               <option key={match.id} value={match.id}>
-                {match.team1?.name ?? "Team 1"} vs {match.team2?.name ?? "Team 2"} · {match.date ?? "TBD"}
+                {match.team1?.name ? "Team 1"} vs {match.team2?.name ? "Team 2"} · {match.date ? "TBD"}
               </option>
             ))}
           </select>

@@ -28,7 +28,7 @@ export default function AdminPlayers() {
     } else {
       setError(null);
     }
-    setPlayers((data ?? []) as Player[]);
+    setPlayers((data ? []) as Player[]);
   };
 
   useEffect(() => {
@@ -162,7 +162,7 @@ export default function AdminPlayers() {
             <div key={player.id} className="flex items-center justify-between text-sm">
               <span>{player.name}</span>
               <div className="flex items-center gap-3">
-                <span className="text-muted">{player.country ?? "--"}</span>
+                <span className="text-muted">{player.country ? "--"}</span>
                 <Link href={`/admin/players/${player.id}`} className="text-xs text-ink">
                   Edit
                 </Link>

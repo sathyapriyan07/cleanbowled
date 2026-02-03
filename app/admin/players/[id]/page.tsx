@@ -37,21 +37,21 @@ export default function AdminPlayerEdit() {
       const data = playerRes.data;
       if (data) {
         setForm({
-          name: data.name ?? "",
-          country: data.country ?? "",
-          role: data.role ?? "",
-          batting_style: data.batting_style ?? "",
-          bowling_style: data.bowling_style ?? "",
-          height: data.height ?? "",
-          dob: data.dob ?? "",
-          bio: data.bio ?? "",
-          profile_image: data.profile_image ?? "",
-          banner: data.banner ?? ""
+          name: data.name ? "",
+          country: data.country ? "",
+          role: data.role ? "",
+          batting_style: data.batting_style ? "",
+          bowling_style: data.bowling_style ? "",
+          height: data.height ? "",
+          dob: data.dob ? "",
+          bio: data.bio ? "",
+          profile_image: data.profile_image ? "",
+          banner: data.banner ? ""
         });
       }
-      setCareerStats((careerRes.data ?? []) as PlayerCareerStat[]);
-      setRecords((recordRes.data ?? []) as PlayerRecord[]);
-      setGraphPoints((graphRes.data ?? []) as PlayerGraphPoint[]);
+      setCareerStats((careerRes.data ? []) as PlayerCareerStat[]);
+      setRecords((recordRes.data ? []) as PlayerRecord[]);
+      setGraphPoints((graphRes.data ? []) as PlayerGraphPoint[]);
       setLoading(false);
     };
     load();
@@ -356,7 +356,7 @@ export default function AdminPlayerEdit() {
         <div className="space-y-2 text-sm">
           {careerStats.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.format ?? "Format"} · {row.runs} runs</span>
+              <span>{row.format ? "Format"} · {row.runs} runs</span>
               <button onClick={() => removeCareer(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -405,7 +405,7 @@ export default function AdminPlayerEdit() {
         <div className="space-y-2 text-sm">
           {records.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.title ?? "Record"} · {row.value ?? ""}</span>
+              <span>{row.title ? "Record"} · {row.value ? ""}</span>
               <button onClick={() => removeRecord(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -458,7 +458,7 @@ export default function AdminPlayerEdit() {
         <div className="space-y-2 text-sm">
           {graphPoints.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.label ?? "Point"} · {row.value ?? 0}</span>
+              <span>{row.label ? "Point"} · {row.value ? 0}</span>
               <button onClick={() => removeGraph(row.id)} className="text-xs text-danger">
                 Remove
               </button>

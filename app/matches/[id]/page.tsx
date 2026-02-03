@@ -2,8 +2,6 @@ import Header from "@/components/Header";
 import MatchTabs from "@/components/MatchTabs";
 import { supabase } from "@/lib/supabase";
 import {
-
-export const dynamic = "force-dynamic";
   Match,
   MatchBatting,
   MatchBowling,
@@ -14,6 +12,8 @@ export const dynamic = "force-dynamic";
   PlayingXI,
   News
 } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
 
 export default async function MatchDetail({
   params
@@ -39,7 +39,7 @@ export default async function MatchDetail({
 
   const { data: playingXI } = await supabase
     .from("match_playing_xi")
-    .select("*, player:player_id(name, profile_image), team:team_id(name)")
+    .select("*, player:player_id(name, profile_image, role), team:team_id(name)")
     .eq("match_id", id);
 
   const { data: partnerships } = await supabase
@@ -101,9 +101,9 @@ export default async function MatchDetail({
             <div>
               <p className="text-xs uppercase tracking-wide text-muted">Score</p>
               <p className="font-[var(--font-sora)] text-lg">
-                {matchData.score1 ?? "—"} · {matchData.score2 ?? "—"}
+                {matchData.score1 ?? "?"} ? {matchData.score2 ?? "?"}
               </p>
-              <p className="text-xs text-muted">{matchData.venue ?? "Venue"} · {matchData.date ?? "Date"}</p>
+              <p className="text-xs text-muted">{matchData.venue ?? "Venue"} ? {matchData.date ?? "Date"}</p>
             </div>
             <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase text-muted">
               {matchData.status ?? "Scheduled"}

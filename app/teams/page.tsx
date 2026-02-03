@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export default async function TeamsPage() {
   const { data } = await supabase.from("teams").select("*").order("name");
-  const teams = (data ?? []) as Team[];
+  const teams = (data ? []) as Team[];
 
   return (
     <div className="pb-24">
@@ -23,11 +23,11 @@ export default async function TeamsPage() {
               <div key={team.id} className="carousel-item min-w-[260px]">
                 <Link href={`/teams/${team.id}`}>
                   <Card className="flex items-center gap-4">
-                    <Avatar src={team.logo ?? undefined} alt={team.name} size="md" />
+                    <Avatar src={team.logo ? undefined} alt={team.name} size="md" />
                     <div>
                       <p className="font-[var(--font-sora)] text-base">{team.name}</p>
                       <p className="text-xs text-muted">
-                        Captain: {team.captain ?? "TBD"} · Coach: {team.coach ?? "TBD"}
+                        Captain: {team.captain ? "TBD"} · Coach: {team.coach ? "TBD"}
                       </p>
                     </div>
                   </Card>

@@ -83,6 +83,31 @@ a {
   .tab-underline-active::after {
     transform: scaleX(1);
   }
+  .pill {
+    border-radius: 9999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .pill-active {
+    background: rgba(46,124,246,0.18);
+    color: #E6F1FF;
+    box-shadow: 0 10px 22px rgba(46,124,246,0.12);
+  }
+  .pill-muted {
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #92A5BE;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #8FA6C2;
+  }
+  .soft-divider {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
   .glow-hover {
     transition: transform 200ms ease, box-shadow 200ms ease;
   }

@@ -11,7 +11,7 @@ const categories = ["Teams", "Batting", "Bowling"];
 
 export default async function RankingsPage() {
   const { data } = await supabase.from("rankings").select("*").order("rank", { ascending: true });
-  const rankings = (data ?? []) as Ranking[];
+  const rankings = (data ? []) as Ranking[];
 
   const formatTabs = formats.map((format) => ({
     label: format,
@@ -51,9 +51,9 @@ export default async function RankingsPage() {
                           {row.rank}
                         </span>
                       </td>
-                      <td className="px-3 py-3">{row.name ?? "—"}</td>
-                      <td className="px-3 py-3">{row.team ?? "—"}</td>
-                      <td className="px-3 py-3">{row.rating ?? 0}</td>
+                      <td className="px-3 py-3">{row.name ? "—"}</td>
+                      <td className="px-3 py-3">{row.team ? "—"}</td>
+                      <td className="px-3 py-3">{row.rating ? 0}</td>
                     </tr>
                   ))}
               </tbody>

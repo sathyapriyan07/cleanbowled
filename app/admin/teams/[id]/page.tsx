@@ -36,18 +36,18 @@ export default function AdminTeamEdit() {
       const data = teamRes.data;
       if (data) {
         setForm({
-          name: data.name ?? "",
-          logo: data.logo ?? "",
-          banner: data.banner ?? "",
-          captain: data.captain ?? "",
-          coach: data.coach ?? ""
+          name: data.name ? "",
+          logo: data.logo ? "",
+          banner: data.banner ? "",
+          captain: data.captain ? "",
+          coach: data.coach ? ""
         });
       }
-      setPlayers((playerRes.data ?? []) as Player[]);
-      setSquads((squadRes.data ?? []) as TeamSquad[]);
-      setRecords((recordRes.data ?? []) as TeamRecord[]);
-      setTrophies((trophyRes.data ?? []) as TeamTrophy[]);
-      setVenuePerf((venueRes.data ?? []) as TeamVenuePerformance[]);
+      setPlayers((playerRes.data ? []) as Player[]);
+      setSquads((squadRes.data ? []) as TeamSquad[]);
+      setRecords((recordRes.data ? []) as TeamRecord[]);
+      setTrophies((trophyRes.data ? []) as TeamTrophy[]);
+      setVenuePerf((venueRes.data ? []) as TeamVenuePerformance[]);
       setLoading(false);
     };
     load();
@@ -242,7 +242,7 @@ export default function AdminTeamEdit() {
         <div className="space-y-2 text-sm">
           {squads.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.player?.name ?? "Player"} · {row.role ?? "Player"}</span>
+              <span>{row.player?.name ? "Player"} · {row.role ? "Player"}</span>
               <button onClick={() => removeSquad(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -291,7 +291,7 @@ export default function AdminTeamEdit() {
         <div className="space-y-2 text-sm">
           {records.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.title ?? "Record"} · {row.value ?? ""}</span>
+              <span>{row.title ? "Record"} · {row.value ? ""}</span>
               <button onClick={() => removeRecord(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -340,7 +340,7 @@ export default function AdminTeamEdit() {
         <div className="space-y-2 text-sm">
           {trophies.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.title ?? "Trophy"} · {row.year ?? "—"}</span>
+              <span>{row.title ? "Trophy"} · {row.year ? "—"}</span>
               <button onClick={() => removeTrophy(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -407,7 +407,7 @@ export default function AdminTeamEdit() {
         <div className="space-y-2 text-sm">
           {venuePerf.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.venue ?? "Venue"} · {row.wins}W/{row.losses}L</span>
+              <span>{row.venue ? "Venue"} · {row.wins}W/{row.losses}L</span>
               <button onClick={() => removeVenue(row.id)} className="text-xs text-danger">
                 Remove
               </button>

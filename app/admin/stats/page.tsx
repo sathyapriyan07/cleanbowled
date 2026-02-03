@@ -41,9 +41,9 @@ export default function AdminStats() {
       supabase.from("venue_records").select("*").order("created_at", { ascending: false }),
       supabase.from("player_comparisons").select("*").order("created_at", { ascending: false })
     ]);
-    setRecords((recordsRes.data ?? []) as RecordItem[]);
-    setVenues((venuesRes.data ?? []) as VenueRecord[]);
-    setComparisons((comparisonsRes.data ?? []) as PlayerComparison[]);
+    setRecords((recordsRes.data ? []) as RecordItem[]);
+    setVenues((venuesRes.data ? []) as VenueRecord[]);
+    setComparisons((comparisonsRes.data ? []) as PlayerComparison[]);
   };
 
   useEffect(() => {
@@ -235,7 +235,7 @@ export default function AdminStats() {
         <div className="space-y-2 text-sm">
           {records.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.title ?? "Record"} · {row.value ?? "—"}</span>
+              <span>{row.title ? "Record"} · {row.value ? "—"}</span>
               <button onClick={() => removeRecord(row.id)} className="text-xs text-danger">
                 Delete
               </button>
@@ -249,7 +249,7 @@ export default function AdminStats() {
         <div className="space-y-2 text-sm">
           {venues.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.venue ?? "Venue"} · {row.title ?? "Record"}</span>
+              <span>{row.venue ? "Venue"} · {row.title ? "Record"}</span>
               <button onClick={() => removeVenue(row.id)} className="text-xs text-danger">
                 Delete
               </button>
@@ -263,7 +263,7 @@ export default function AdminStats() {
         <div className="space-y-2 text-sm">
           {comparisons.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.title ?? "Comparison"} · {row.player1} vs {row.player2}</span>
+              <span>{row.title ? "Comparison"} · {row.player1} vs {row.player2}</span>
               <button onClick={() => removeComparison(row.id)} className="text-xs text-danger">
                 Delete
               </button>

@@ -14,9 +14,9 @@ export default async function StatsPage() {
   const { data: venueRecords } = await supabase.from("venue_records").select("*").order("created_at", { ascending: false });
   const { data: comparisons } = await supabase.from("player_comparisons").select("*").order("created_at", { ascending: false });
 
-  const recordList = (records ?? []) as RecordItem[];
-  const venueList = (venueRecords ?? []) as VenueRecord[];
-  const comparisonList = (comparisons ?? []) as PlayerComparison[];
+  const recordList = (records ? []) as RecordItem[];
+  const venueList = (venueRecords ? []) as VenueRecord[];
+  const comparisonList = (comparisons ? []) as PlayerComparison[];
 
   return (
     <div className="pb-24">
@@ -39,12 +39,12 @@ export default async function StatsPage() {
                     <div className="space-y-3">
                       {recordList.map((row) => (
                         <Card key={row.id}>
-                          <p className="text-xs uppercase tracking-wide text-muted">{row.category ?? "Record"}</p>
-                          <p className="font-[var(--font-sora)] text-base">{row.title ?? "Title"}</p>
+                          <p className="text-xs uppercase tracking-wide text-muted">{row.category ? "Record"}</p>
+                          <p className="font-[var(--font-sora)] text-base">{row.title ? "Title"}</p>
                           <p className="text-sm text-muted">
-                            {row.player_name ?? "Player"} · {row.team_name ?? "Team"}
+                            {row.player_name ? "Player"} · {row.team_name ? "Team"}
                           </p>
-                          <p className="mt-2 text-sm text-ink">{row.value ?? "—"}</p>
+                          <p className="mt-2 text-sm text-ink">{row.value ? "—"}</p>
                         </Card>
                       ))}
                     </div>
@@ -60,10 +60,10 @@ export default async function StatsPage() {
                 <div className="space-y-3">
                   {venueList.map((row) => (
                     <Card key={row.id}>
-                      <p className="text-xs uppercase tracking-wide text-muted">{row.venue ?? "Venue"}</p>
-                      <p className="font-[var(--font-sora)] text-base">{row.title ?? "Title"}</p>
-                      <p className="text-sm text-muted">{row.category ?? "Category"}</p>
-                      <p className="mt-2 text-sm text-ink">{row.value ?? "—"}</p>
+                      <p className="text-xs uppercase tracking-wide text-muted">{row.venue ? "Venue"}</p>
+                      <p className="font-[var(--font-sora)] text-base">{row.title ? "Title"}</p>
+                      <p className="text-sm text-muted">{row.category ? "Category"}</p>
+                      <p className="mt-2 text-sm text-ink">{row.value ? "—"}</p>
                     </Card>
                   ))}
                 </div>
@@ -77,16 +77,16 @@ export default async function StatsPage() {
                 <div className="space-y-3">
                   {comparisonList.map((row) => (
                     <Card key={row.id} className="space-y-2">
-                      <p className="text-xs uppercase tracking-wide text-muted">{row.title ?? "Comparison"}</p>
+                      <p className="text-xs uppercase tracking-wide text-muted">{row.title ? "Comparison"}</p>
                       <div className="flex items-center justify-between text-sm">
-                        <span>{row.player1 ?? "Player 1"}</span>
-                        <span className="font-[var(--font-sora)]">{row.stat1 ?? 0}</span>
+                        <span>{row.player1 ? "Player 1"}</span>
+                        <span className="font-[var(--font-sora)]">{row.stat1 ? 0}</span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span>{row.player2 ?? "Player 2"}</span>
-                        <span className="font-[var(--font-sora)]">{row.stat2 ?? 0}</span>
+                        <span>{row.player2 ? "Player 2"}</span>
+                        <span className="font-[var(--font-sora)]">{row.stat2 ? 0}</span>
                       </div>
-                      <p className="text-xs text-muted">{row.format ?? "Format"}</p>
+                      <p className="text-xs text-muted">{row.format ? "Format"}</p>
                     </Card>
                   ))}
                 </div>

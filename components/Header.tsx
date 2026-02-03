@@ -23,7 +23,7 @@ export default function Header({
           Clean<span className="text-muted">Bowled</span>
         </div>
         {rightSlot === null ? null : (
-          rightSlot ?? (
+          rightSlot ? (
             <div className="flex items-center gap-2">
               <Link
                 href="/search"
@@ -37,8 +37,9 @@ export default function Header({
       </div>
       <div className="mx-auto mt-6 max-w-4xl">
         {showBack ? (
-          <Link href={backHref} className="text-xs text-muted">
-            ← Back
+          <Link href={backHref} className="inline-flex items-center gap-2 text-xs text-muted">
+            <span className="text-lg">←</span>
+            Back
           </Link>
         ) : null}
         <h1 className="mt-3 font-[var(--font-sora)] text-2xl font-semibold text-ink">

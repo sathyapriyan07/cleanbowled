@@ -24,11 +24,11 @@ export default function AdminDashboard() {
       ]);
 
       setCounts({
-        players: players.count ?? 0,
-        teams: teams.count ?? 0,
-        matches: matches.count ?? 0,
-        series: series.count ?? 0,
-        news: news.count ?? 0
+        players: players.count ? 0,
+        teams: teams.count ? 0,
+        matches: matches.count ? 0,
+        series: series.count ? 0,
+        news: news.count ? 0
       });
     };
 

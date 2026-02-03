@@ -27,8 +27,8 @@ export default async function SeriesPage() {
               <SeriesCard
                 id={item.id}
                 name={item.name}
-                banner={item.banner ?? undefined}
-                location={item.location ?? undefined}
+                banner={item.banner ? undefined}
+                location={item.location ? undefined}
                 dates={
                   item.start_date && item.end_date
                     ? `${item.start_date} · ${item.end_date}`

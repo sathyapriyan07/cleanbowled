@@ -38,7 +38,7 @@ export default function MatchCard({
           ) : null}
         </div>
         <div className="flex-1">
-          <p className="text-xs text-muted">{date ?? "TBD"} · {venue ?? "Venue TBC"}</p>
+          <p className="text-xs text-muted">{date ? "TBD"} · {venue ? "Venue TBC"}</p>
           <div className="mt-2 flex items-center gap-2">
             <div className="flex items-center gap-2">
               <div className="h-6 w-6 overflow-hidden rounded-full bg-cardAlt">
@@ -61,8 +61,8 @@ export default function MatchCard({
             </div>
           </div>
           <div className="mt-3 flex items-center justify-between text-xs">
-            <span>{score1 ?? "—"} / {score2 ?? "—"}</span>
-            <span className="text-success">{result ?? "Awaiting result"}</span>
+            <span>{score1 ? "—"} / {score2 ? "—"}</span>
+            <span className="text-success">{result ? "Awaiting result"}</span>
           </div>
         </div>
       </Card>

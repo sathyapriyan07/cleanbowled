@@ -25,9 +25,9 @@ export default function AdminNews() {
       supabase.from("players").select("*").order("name"),
       supabase.from("matches").select("*, team1:team1_id(name), team2:team2_id(name)").order("date", { ascending: false })
     ]);
-    setNews((newsRes.data ?? []) as News[]);
-    setPlayers((playerRes.data ?? []) as Player[]);
-    setMatches((matchRes.data ?? []) as Match[]);
+    setNews((newsRes.data ? []) as News[]);
+    setPlayers((playerRes.data ? []) as Player[]);
+    setMatches((matchRes.data ? []) as Match[]);
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export default function AdminNews() {
             <option value="">Match (optional)</option>
             {matches.map((match: any) => (
               <option key={match.id} value={match.id}>
-                {match.team1?.name ?? "Team 1"} vs {match.team2?.name ?? "Team 2"} · {match.date ?? "TBD"}
+                {match.team1?.name ? "Team 1"} vs {match.team2?.name ? "Team 2"} · {match.date ? "TBD"}
               </option>
             ))}
           </select>

@@ -22,7 +22,7 @@ export default function AdminSeries() {
 
   const load = async () => {
     const { data } = await supabase.from("series").select("*").order("start_date", { ascending: false });
-    setSeries((data ?? []) as Series[]);
+    setSeries((data ? []) as Series[]);
   };
 
   useEffect(() => {
@@ -145,7 +145,7 @@ export default function AdminSeries() {
             <div key={item.id} className="flex items-center justify-between">
               <span>{item.name}</span>
               <div className="flex items-center gap-3">
-                <span className="text-muted">{item.location ?? "—"}</span>
+                <span className="text-muted">{item.location ? "—"}</span>
                 <Link href={`/admin/series/${item.id}`} className="text-xs text-ink">
                   Edit
                 </Link>

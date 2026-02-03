@@ -18,7 +18,7 @@ export default function AdminRankings() {
 
   const load = async () => {
     const { data } = await supabase.from("rankings").select("*").order("rank");
-    setRows((data ?? []) as Ranking[]);
+    setRows((data ? []) as Ranking[]);
   };
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export default function AdminRankings() {
         <div className="space-y-2 text-sm">
           {rows.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>#{row.rank} · {row.name ?? "Name"} · {row.format ?? "Format"}</span>
+              <span>#{row.rank} · {row.name ? "Name"} · {row.format ? "Format"}</span>
               <button onClick={() => remove(row.id)} className="text-xs text-danger">
                 Delete
               </button>

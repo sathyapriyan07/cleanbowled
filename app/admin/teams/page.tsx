@@ -23,7 +23,7 @@ export default function AdminTeams() {
     } else {
       setError(null);
     }
-    setTeams((data ?? []) as Team[]);
+    setTeams((data ? []) as Team[]);
   };
 
   useEffect(() => {

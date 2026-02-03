@@ -48,21 +48,21 @@ export default function AdminSeriesEdit() {
       const data = seriesRes.data;
       if (data) {
         setForm({
-          name: data.name ?? "",
-          location: data.location ?? "",
-          start_date: data.start_date ?? "",
-          end_date: data.end_date ?? "",
-          season: data.season ?? "",
-          format: data.format ?? "",
-          is_archived: data.is_archived ?? false,
-          banner: data.banner ?? ""
+          name: data.name ? "",
+          location: data.location ? "",
+          start_date: data.start_date ? "",
+          end_date: data.end_date ? "",
+          season: data.season ? "",
+          format: data.format ? "",
+          is_archived: data.is_archived ? false,
+          banner: data.banner ? ""
         });
       }
-      setTeams((teamRes.data ?? []) as Team[]);
-      setPlayers((playerRes.data ?? []) as Player[]);
-      setPoints((pointsRes.data ?? []) as SeriesPoint[]);
-      setSquads((squadsRes.data ?? []) as SeriesSquad[]);
-      setLeaders((leadersRes.data ?? []) as SeriesStatsLeader[]);
+      setTeams((teamRes.data ? []) as Team[]);
+      setPlayers((playerRes.data ? []) as Player[]);
+      setPoints((pointsRes.data ? []) as SeriesPoint[]);
+      setSquads((squadsRes.data ? []) as SeriesSquad[]);
+      setLeaders((leadersRes.data ? []) as SeriesStatsLeader[]);
       setLoading(false);
     };
     load();
@@ -350,7 +350,7 @@ export default function AdminSeriesEdit() {
         <div className="space-y-2 text-sm">
           {points.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.team?.name ?? "Team"} · {row.points} pts</span>
+              <span>{row.team?.name ? "Team"} · {row.points} pts</span>
               <button onClick={() => removePoint(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -407,7 +407,7 @@ export default function AdminSeriesEdit() {
         <div className="space-y-2 text-sm">
           {squads.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.team?.name ?? "Team"} · {row.player?.name ?? "Player"}</span>
+              <span>{row.team?.name ? "Team"} · {row.player?.name ? "Player"}</span>
               <button onClick={() => removeSquad(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -465,7 +465,7 @@ export default function AdminSeriesEdit() {
         <div className="space-y-2 text-sm">
           {leaders.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.stat_type ?? "Stat"} · {row.player_name ?? "Player"}</span>
+              <span>{row.stat_type ? "Stat"} · {row.player_name ? "Player"}</span>
               <button onClick={() => removeLeader(row.id)} className="text-xs text-danger">
                 Remove
               </button>

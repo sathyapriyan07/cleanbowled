@@ -54,10 +54,10 @@ export default function AdminMatches() {
       supabase.from("series").select("*").order("start_date", { ascending: false }),
       supabase.from("players").select("*").order("name")
     ]);
-    setMatches((matchRes.data ?? []) as Match[]);
-    setTeams((teamRes.data ?? []) as Team[]);
-    setSeries((seriesRes.data ?? []) as Series[]);
-    setPlayers((playerRes.data ?? []) as Player[]);
+    setMatches((matchRes.data ? []) as Match[]);
+    setTeams((teamRes.data ? []) as Team[]);
+    setSeries((seriesRes.data ? []) as Series[]);
+    setPlayers((playerRes.data ? []) as Player[]);
   };
 
   useEffect(() => {
@@ -460,9 +460,9 @@ export default function AdminMatches() {
         <div className="space-y-2 text-sm">
           {matches.map((match) => (
             <div key={match.id} className="flex items-center justify-between">
-              <span>{match.date ?? "TBD"}</span>
+              <span>{match.date ? "TBD"}</span>
               <div className="flex items-center gap-3">
-                <span className="text-muted">{match.result ?? "Scheduled"}</span>
+                <span className="text-muted">{match.result ? "Scheduled"}</span>
                 <Link href={`/admin/matches/${match.id}`} className="text-xs text-ink">
                   Edit
                 </Link>

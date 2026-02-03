@@ -144,48 +144,48 @@ export default function AdminMatchEdit() {
     const data = matchRes.data as Match | null;
       if (data) {
         setForm({
-          series_id: data.series_id ?? "",
-          team1_id: data.team1_id ?? "",
-          team2_id: data.team2_id ?? "",
-          format: data.format ?? "",
-          score1: data.score1 ?? "",
-          score2: data.score2 ?? "",
-          overs1: data.overs1 ?? "",
-        overs2: data.overs2 ?? "",
-        result: data.result ?? "",
-        venue: data.venue ?? "",
-        date: data.date ?? "",
-        status: data.status ?? "",
-        thumbnail: data.thumbnail ?? "",
-        toss_winner_id: data.toss_winner_id ?? "",
-        toss_decision: data.toss_decision ?? "",
-        umpires: data.umpires ?? "",
-        referee: data.referee ?? "",
-        player_of_match_id: data.player_of_match_id ?? ""
+          series_id: data.series_id ? "",
+          team1_id: data.team1_id ? "",
+          team2_id: data.team2_id ? "",
+          format: data.format ? "",
+          score1: data.score1 ? "",
+          score2: data.score2 ? "",
+          overs1: data.overs1 ? "",
+        overs2: data.overs2 ? "",
+        result: data.result ? "",
+        venue: data.venue ? "",
+        date: data.date ? "",
+        status: data.status ? "",
+        thumbnail: data.thumbnail ? "",
+        toss_winner_id: data.toss_winner_id ? "",
+        toss_decision: data.toss_decision ? "",
+        umpires: data.umpires ? "",
+        referee: data.referee ? "",
+        player_of_match_id: data.player_of_match_id ? ""
       });
     }
 
-    setTeams((teamRes.data ?? []) as Team[]);
-    setSeries((seriesRes.data ?? []) as Series[]);
-    setPlayers((playerRes.data ?? []) as Player[]);
-    setBattingRows((battingRes.data ?? []) as MatchBatting[]);
-    setBowlingRows((bowlingRes.data ?? []) as MatchBowling[]);
-    setPlayingXI((xiRes.data ?? []) as PlayingXI[]);
-    setPlayerStats((statsRes.data ?? []) as PlayerMatchStats[]);
-    setPartnerships((partnershipsRes.data ?? []) as MatchPartnership[]);
-    setFallOfWickets((fowRes.data ?? []) as MatchFallOfWicket[]);
-    setSummary((summaryRes.data ?? null) as MatchSummary | null);
-    setHeadToHead((h2hRes.data ?? null) as MatchHeadToHead | null);
+    setTeams((teamRes.data ? []) as Team[]);
+    setSeries((seriesRes.data ? []) as Series[]);
+    setPlayers((playerRes.data ? []) as Player[]);
+    setBattingRows((battingRes.data ? []) as MatchBatting[]);
+    setBowlingRows((bowlingRes.data ? []) as MatchBowling[]);
+    setPlayingXI((xiRes.data ? []) as PlayingXI[]);
+    setPlayerStats((statsRes.data ? []) as PlayerMatchStats[]);
+    setPartnerships((partnershipsRes.data ? []) as MatchPartnership[]);
+    setFallOfWickets((fowRes.data ? []) as MatchFallOfWicket[]);
+    setSummary((summaryRes.data ? null) as MatchSummary | null);
+    setHeadToHead((h2hRes.data ? null) as MatchHeadToHead | null);
     setSummaryEntry({
-      key_moments: summaryRes.data?.key_moments ?? "",
-      highlights: summaryRes.data?.highlights ?? ""
+      key_moments: summaryRes.data?.key_moments ? "",
+      highlights: summaryRes.data?.highlights ? ""
     });
     setH2hEntry({
-      team1_id: h2hRes.data?.team1_id ?? "",
-      team2_id: h2hRes.data?.team2_id ?? "",
-      team1_wins: h2hRes.data?.team1_wins ?? 0,
-      team2_wins: h2hRes.data?.team2_wins ?? 0,
-      no_result: h2hRes.data?.no_result ?? 0
+      team1_id: h2hRes.data?.team1_id ? "",
+      team2_id: h2hRes.data?.team2_id ? "",
+      team1_wins: h2hRes.data?.team1_wins ? 0,
+      team2_wins: h2hRes.data?.team2_wins ? 0,
+      no_result: h2hRes.data?.no_result ? 0
     });
     setLoading(false);
   };
@@ -636,7 +636,7 @@ export default function AdminMatchEdit() {
         <div className="space-y-2 text-sm">
           {battingRows.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.player?.name ?? "Batter"} · {row.runs}/{row.balls}</span>
+              <span>{row.player?.name ? "Batter"} · {row.runs}/{row.balls}</span>
               <button onClick={() => removeBatting(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -716,7 +716,7 @@ export default function AdminMatchEdit() {
         <div className="space-y-2 text-sm">
           {bowlingRows.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.player?.name ?? "Bowler"} · {row.overs}-{row.maidens}-{row.runs_conceded}-{row.wickets}</span>
+              <span>{row.player?.name ? "Bowler"} · {row.overs}-{row.maidens}-{row.runs_conceded}-{row.wickets}</span>
               <button onClick={() => removeBowling(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -775,7 +775,7 @@ export default function AdminMatchEdit() {
         <div className="space-y-2 text-sm">
           {playingXI.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.player?.name ?? "Player"} · {row.team?.name ?? "Team"} · {row.status}</span>
+              <span>{row.player?.name ? "Player"} · {row.team?.name ? "Team"} · {row.status}</span>
               <button onClick={() => removeXI(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -917,7 +917,7 @@ export default function AdminMatchEdit() {
         <div className="space-y-2 text-sm">
           {fallOfWickets.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.player_out ?? "Player"} · {row.score} ({row.over})</span>
+              <span>{row.player_out ? "Player"} · {row.score} ({row.over})</span>
               <button onClick={() => removeFow(row.id)} className="text-xs text-danger">
                 Remove
               </button>
@@ -1119,7 +1119,7 @@ export default function AdminMatchEdit() {
         <div className="space-y-2 text-sm">
           {playerStats.map((row) => (
             <div key={row.id} className="flex items-center justify-between">
-              <span>{row.player?.name ?? "Player"} · {row.runs}/{row.balls}</span>
+              <span>{row.player?.name ? "Player"} · {row.runs}/{row.balls}</span>
               <button onClick={() => removePlayerStats(row.id)} className="text-xs text-danger">
                 Remove
               </button>

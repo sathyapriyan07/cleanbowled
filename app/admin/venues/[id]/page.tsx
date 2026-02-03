@@ -33,16 +33,16 @@ export default function AdminVenueEdit() {
     const data = venueRes.data;
     if (data) {
       setForm({
-        name: data.name ?? "",
-        city: data.city ?? "",
-        country: data.country ?? "",
-        capacity: data.capacity ?? 0,
-        pitch_type: data.pitch_type ?? "",
-        average_score: data.average_score ?? "",
-        image: data.image ?? ""
+        name: data.name ? "",
+        city: data.city ? "",
+        country: data.country ? "",
+        capacity: data.capacity ? 0,
+        pitch_type: data.pitch_type ? "",
+        average_score: data.average_score ? "",
+        image: data.image ? ""
       });
     }
-    setImages((imagesRes.data ?? []) as VenueImage[]);
+    setImages((imagesRes.data ? []) as VenueImage[]);
     setLoading(false);
   };
 
@@ -158,7 +158,7 @@ export default function AdminVenueEdit() {
         <div className="space-y-2 text-sm">
           {images.map((img) => (
             <div key={img.id} className="flex items-center justify-between">
-              <span>{img.caption ?? "Image"}</span>
+              <span>{img.caption ? "Image"}</span>
               <button onClick={() => removeImage(img.id)} className="text-xs text-danger">
                 Remove
               </button>

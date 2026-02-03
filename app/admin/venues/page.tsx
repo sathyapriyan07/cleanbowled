@@ -19,7 +19,7 @@ export default function AdminVenues() {
 
   const load = async () => {
     const { data } = await supabase.from("venues").select("*").order("name");
-    setVenues((data ?? []) as Venue[]);
+    setVenues((data ? []) as Venue[]);
   };
 
   useEffect(() => {
@@ -127,7 +127,7 @@ export default function AdminVenues() {
         <div className="space-y-2 text-sm">
           {venues.map((venue) => (
             <div key={venue.id} className="flex items-center justify-between">
-              <span>{venue.name ?? "Venue"} · {venue.city ?? "City"}</span>
+              <span>{venue.name ? "Venue"} · {venue.city ? "City"}</span>
               <div className="flex items-center gap-3">
                 <a href={`/admin/venues/${venue.id}`} className="text-xs text-ink">
                   Edit

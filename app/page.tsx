@@ -35,16 +35,16 @@ export default async function Home() {
               <div key={match.id} className="carousel-item min-w-[280px]">
                 <MatchCard
                   id={match.id}
-                  team1={match.team1?.name ?? "Team One"}
-                  team2={match.team2?.name ?? "Team Two"}
-                  team1Logo={match.team1?.logo ?? undefined}
-                  team2Logo={match.team2?.logo ?? undefined}
-                  score1={match.score1 ?? undefined}
-                  score2={match.score2 ?? undefined}
-                  result={match.result ?? undefined}
-                  venue={match.venue ?? undefined}
-                  date={match.date ?? undefined}
-                  thumbnail={match.thumbnail ?? undefined}
+                  team1={match.team1?.name ? "Team One"}
+                  team2={match.team2?.name ? "Team Two"}
+                  team1Logo={match.team1?.logo ? undefined}
+                  team2Logo={match.team2?.logo ? undefined}
+                  score1={match.score1 ? undefined}
+                  score2={match.score2 ? undefined}
+                  result={match.result ? undefined}
+                  venue={match.venue ? undefined}
+                  date={match.date ? undefined}
+                  thumbnail={match.thumbnail ? undefined}
                 />
               </div>
             ))}
@@ -59,8 +59,8 @@ export default async function Home() {
                 <SeriesCard
                   id={item.id}
                   name={item.name}
-                  banner={item.banner ?? undefined}
-                  location={item.location ?? undefined}
+                  banner={item.banner ? undefined}
+                  location={item.location ? undefined}
                   dates={
                     item.start_date && item.end_date
                       ? `${item.start_date} · ${item.end_date}`

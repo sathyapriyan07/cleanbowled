@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function VenuesPage() {
   const { data } = await supabase.from("venues").select("*").order("name");
-  const venues = (data ?? []) as Venue[];
+  const venues = (data ? []) as Venue[];
 
   return (
     <div className="pb-24">
@@ -23,13 +23,13 @@ export default async function VenuesPage() {
                 <div className="h-16 w-20 overflow-hidden rounded-2xl bg-cardAlt">
                   {venue.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={venue.image} alt={venue.name ?? "Venue"} className="h-full w-full object-cover" />
+                    <img src={venue.image} alt={venue.name ? "Venue"} className="h-full w-full object-cover" />
                   ) : null}
                 </div>
                 <div>
-                  <p className="font-[var(--font-sora)] text-base">{venue.name ?? "Venue"}</p>
+                  <p className="font-[var(--font-sora)] text-base">{venue.name ? "Venue"}</p>
                   <p className="text-xs text-muted">
-                    {venue.city ?? "City"} · {venue.country ?? "Country"}
+                    {venue.city ? "City"} · {venue.country ? "Country"}
                   </p>
                 </div>
               </Card>
