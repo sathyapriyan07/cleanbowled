@@ -5,6 +5,8 @@ import { supabase } from "@/lib/supabase";
 import { samplePlayers } from "@/lib/sampleData";
 import { Player } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function Players() {
   const { data } = await supabase.from("players").select("*").order("name");
 

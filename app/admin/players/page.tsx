@@ -8,6 +8,7 @@ import { Player } from "@/lib/types";
 
 export default function AdminPlayers() {
   const [players, setPlayers] = useState<Player[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     country: "",
@@ -20,7 +21,13 @@ export default function AdminPlayers() {
   });
 
   const load = async () => {
-    const { data } = await supabase.from("players").select("*").order("name");
+    const { data, error: loadError } = await supabase.from("players").select("*").order("name");
+    if (loadError) {
+      console.error(loadError);
+      setError(loadError.message);
+    } else {
+      setError(null);
+    }
     setPlayers((data ?? []) as Player[]);
   };
 
@@ -29,7 +36,12 @@ export default function AdminPlayers() {
   }, []);
 
   const create = async () => {
-    await supabase.from("players").insert(form);
+    const { error: insertError } = await supabase.from("players").insert(form);
+    if (insertError) {
+      console.error(insertError);
+      setError(insertError.message);
+      return;
+    }
     setForm({
       name: "",
       country: "",
@@ -40,11 +52,18 @@ export default function AdminPlayers() {
       profile_image: "",
       banner: ""
     });
+    setError(null);
     load();
   };
 
   const remove = async (id: string) => {
-    await supabase.from("players").delete().eq("id", id);
+    const { error: deleteError } = await supabase.from("players").delete().eq("id", id);
+    if (deleteError) {
+      console.error(deleteError);
+      setError(deleteError.message);
+    } else {
+      setError(null);
+    }
     load();
   };
 
@@ -133,6 +152,7 @@ export default function AdminPlayers() {
         >
           Save Player
         </button>
+        {error ? <p className="text-xs text-danger">Error: {error}</p> : null}
       </Card>
 
       <Card>
