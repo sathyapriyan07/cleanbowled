@@ -8,6 +8,7 @@ import { Team } from "@/lib/types";
 
 export default function AdminTeams() {
   const [teams, setTeams] = useState<Team[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [logo, setLogo] = useState("");
   const [banner, setBanner] = useState("");
@@ -15,7 +16,13 @@ export default function AdminTeams() {
   const [coach, setCoach] = useState("");
 
   const load = async () => {
-    const { data } = await supabase.from("teams").select("*").order("name");
+    const { data, error: loadError } = await supabase.from("teams").select("*").order("name");
+    if (loadError) {
+      console.error(loadError);
+      setError(loadError.message);
+    } else {
+      setError(null);
+    }
     setTeams((data ?? []) as Team[]);
   };
 
@@ -24,17 +31,31 @@ export default function AdminTeams() {
   }, []);
 
   const create = async () => {
-    await supabase.from("teams").insert({ name, logo, banner, captain, coach });
+    const { error: insertError } = await supabase
+      .from("teams")
+      .insert({ name, logo, banner, captain, coach });
+    if (insertError) {
+      console.error(insertError);
+      setError(insertError.message);
+      return;
+    }
     setName("");
     setLogo("");
     setBanner("");
     setCaptain("");
     setCoach("");
+    setError(null);
     load();
   };
 
   const remove = async (id: string) => {
-    await supabase.from("teams").delete().eq("id", id);
+    const { error: deleteError } = await supabase.from("teams").delete().eq("id", id);
+    if (deleteError) {
+      console.error(deleteError);
+      setError(deleteError.message);
+    } else {
+      setError(null);
+    }
     load();
   };
 
@@ -93,6 +114,7 @@ export default function AdminTeams() {
         >
           Save Team
         </button>
+        {error ? <p className="text-xs text-danger">Error: {error}</p> : null}
       </Card>
       <Card>
         <h3 className="mb-3 font-[var(--font-sora)] text-lg">Teams</h3>
